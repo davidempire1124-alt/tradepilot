@@ -1,118 +1,410 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>TradePilot — Bot Dashboard</title>
-  <meta name="description" content="Trading bot dashboard prototype with speed bot and bulk analysis simulator.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TradePilot — Trading Dashboard</title>
+  <meta name="description" content="TradePilot trading dashboard">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <header class="topbar">
-    <div class="brand"><span class="brand-mark">⚡</span> TradePilot</div>
-    <div class="balance">10,899.33 <span>USD</span> ▾</div>
-  </header>
 
-  <nav class="tabs">
-    <button class="tab active" data-page="dashboard">🏠 Dashboard</button>
-    <button class="tab" data-page="bot">🤖 Bot Builder</button>
-    <button class="tab" data-page="bulk">📊 Bulk Trading</button>
-    <button class="tab" data-page="speed">⚡ Speed Bot</button>
-  </nav>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">⚡</span>
+    <span>TradePilot</span>
+  </div>
 
-  <main>
-    <section id="dashboard" class="page active">
-      <div class="hero">
+  <div class="account-area">
+    <button id="connectDeriv" class="connect-btn">
+      Connect Deriv
+    </button>
+
+    <div id="accountBalance" class="balance">
+      -- <span>USD</span>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs">
+  <button class="tab active" data-page="dashboard">🏠 Dashboard</button>
+  <button class="tab" data-page="bot">🤖 Bot Builder</button>
+  <button class="tab" data-page="free">🟢 Free Bots</button>
+  <button class="tab" data-page="bulk">📊 Bulk Trading</button>
+  <button class="tab" data-page="speed">⚡ Speed Bot</button>
+</nav>
+
+<main>
+
+  <!-- DASHBOARD -->
+  <section id="dashboard" class="page active">
+
+    <div class="hero">
+      <div>
+        <h1>Buenos días 👋</h1>
+        <p>“Discipline beats intelligence in the long run.”</p>
+      </div>
+    </div>
+
+    <div class="connection-card">
+      <div>
+        <strong id="connectionStatus">Deriv not connected</strong>
+        <p id="connectionText">
+          Connect your Deriv account to use live market data.
+        </p>
+      </div>
+
+      <button id="dashboardConnect" class="primary-btn">
+        Connect Deriv
+      </button>
+    </div>
+
+    <div class="quick-grid">
+
+      <button class="quick" data-page="bot">
+        <span class="quick-icon">📁</span>
+        <strong>Upload Bot</strong>
+        <small>Import your JSON bot file.</small>
+        <em>Open →</em>
+      </button>
+
+      <button class="quick" data-page="free">
+        <span class="quick-icon">🟢</span>
+        <strong>Free Bots</strong>
+        <small>Browse ready-made strategies.</small>
+        <em>Open →</em>
+      </button>
+
+      <button class="quick" data-page="bot">
+        <span class="quick-icon">🧩</span>
+        <strong>Bot Builder</strong>
+        <small>Build and configure your strategy.</small>
+        <em>Open →</em>
+      </button>
+
+      <button class="quick" data-page="speed">
+        <span class="quick-icon">⚡</span>
+        <strong>Quick Strategy</strong>
+        <small>Start with a simple speed-bot setup.</small>
+        <em>Open →</em>
+      </button>
+
+    </div>
+
+    <div class="partner-card">
+      <span>PARTNER REFERRAL</span>
+      <h2>TradePilot Partner</h2>
+      <p>Build your trading community.</p>
+    </div>
+
+  </section>
+
+
+  <!-- BOT BUILDER -->
+  <section id="bot" class="page">
+
+    <div class="section-heading">
+      <span>🤖</span>
+      <div>
+        <h2>Bot Builder</h2>
+        <p>Create and configure your strategy.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+
+      <label>Strategy name</label>
+      <input id="botName" type="text" value="My TradePilot Bot">
+
+      <label>Market</label>
+      <select id="botMarket">
+        <option>Volatility 100 (1s)</option>
+        <option>Volatility 75 (1s)</option>
+        <option>Volatility 50 (1s)</option>
+        <option>Volatility 25 (1s)</option>
+      </select>
+
+      <label>Trade type</label>
+      <select id="botType">
+        <option>Even</option>
+        <option>Odd</option>
+        <option>Over</option>
+        <option>Under</option>
+      </select>
+
+      <label>Stake</label>
+      <input id="botStake" type="number" value="1" min="0.35" step="0.01">
+
+      <button id="saveBot" class="primary-btn full">
+        Save Strategy
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- FREE BOTS -->
+  <section id="free" class="page">
+
+    <div class="section-heading">
+      <span>🟢</span>
+      <div>
+        <h2>Free Bots</h2>
+        <p>Ready-made TradePilot strategies.</p>
+      </div>
+    </div>
+
+    <div class="bot-list">
+
+      <button class="strategy-card" data-strategy="Even Tick">
+        <strong>Even Tick Strategy</strong>
+        <span>Digit Even analysis</span>
+        <em>Use →</em>
+      </button>
+
+      <button class="strategy-card" data-strategy="Odd Tick">
+        <strong>Odd Tick Strategy</strong>
+        <span>Digit Odd analysis</span>
+        <em>Use →</em>
+      </button>
+
+      <button class="strategy-card" data-strategy="Alternating">
+        <strong>Alternating Strategy</strong>
+        <span>Switch between Even and Odd</span>
+        <em>Use →</em>
+      </button>
+
+      <button class="strategy-card" data-strategy="Recovery">
+        <strong>Recovery Strategy</strong>
+        <span>Controlled recovery settings</span>
+        <em>Use →</em>
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- BULK TRADING -->
+  <section id="bulk" class="page">
+
+    <div class="section-heading">
+      <span>📊</span>
+      <div>
+        <h2>Bulk Trading Analysis</h2>
+        <p>Analyze a large number of ticks before trading.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+
+      <label>Market</label>
+      <select id="bulkMarket">
+        <option>Volatility 100 (1s)</option>
+        <option>Volatility 75 (1s)</option>
+        <option>Volatility 50 (1s)</option>
+        <option>Volatility 25 (1s)</option>
+      </select>
+
+      <label>Number of ticks</label>
+      <select id="bulkTicks">
+        <option value="100">100 ticks</option>
+        <option value="500">500 ticks</option>
+        <option value="1000">1,000 ticks</option>
+        <option value="5000">5,000 ticks</option>
+        <option value="10000">10,000 ticks</option>
+      </select>
+
+      <button id="analyzeBulk" class="primary-btn full">
+        📊 Analyze Ticks
+      </button>
+
+    </div>
+
+    <div id="bulkResults" class="analysis-grid">
+
+      <div class="stat-card">
+        <span>Even</span>
+        <strong id="evenPercent">--%</strong>
+      </div>
+
+      <div class="stat-card">
+        <span>Odd</span>
+        <strong id="oddPercent">--%</strong>
+      </div>
+
+      <div class="stat-card">
+        <span>Last Digit</span>
+        <strong id="lastDigit">--</strong>
+      </div>
+
+      <div class="stat-card">
+        <span>Sample</span>
+        <strong id="sampleSize">--</strong>
+      </div>
+
+    </div>
+
+    <div class="panel">
+      <h3>Recent Tick Analysis</h3>
+      <div id="tickHistory" class="tick-history">
+        Run an analysis to see results.
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- SPEED BOT -->
+  <section id="speed" class="page">
+
+    <div class="section-heading">
+      <span>⚡</span>
+      <div>
+        <h2>Speed Bot</h2>
+        <p>EXECUTE TRADE ON EVERY TICK</p>
+      </div>
+    </div>
+
+    <div class="warning-card">
+      <strong>Simulation / Demo Mode</strong>
+      <span>Test your strategy before enabling real trading.</span>
+    </div>
+
+    <div class="panel">
+
+      <label>Market</label>
+      <select id="speedMarket">
+        <option>Volatility 100 (1s)</option>
+        <option>Volatility 75 (1s)</option>
+        <option>Volatility 50 (1s)</option>
+        <option>Volatility 25 (1s)</option>
+      </select>
+
+      <label>Contract</label>
+      <select id="speedContract">
+        <option>Even</option>
+        <option>Odd</option>
+        <option>Over</option>
+        <option>Under</option>
+      </select>
+
+      <div class="two-column">
+
         <div>
-          <div class="hello">Buenos días 👋</div>
-          <p>“Discipline beats intelligence in the long run.”</p>
+          <label>Ticks</label>
+          <input id="speedTicks" type="number" value="1" min="1">
         </div>
-      </div>
 
-      <div class="quick-grid">
-        <button class="quick" data-page="bot"><b>📁 Upload Bot</b><span>Import your JSON bot file.</span><em>Open →</em></button>
-        <button class="quick" data-page="speed"><b>🟢 Free Bots</b><span>Browse ready-made strategies.</span><em>Open →</em></button>
-        <button class="quick" data-page="bot"><b>🧩 Bot Builder</b><span>Build and configure your strategy.</span><em>Open →</em></button>
-        <button class="quick" data-page="speed"><b>⚡ Quick Start</b><span>Start with a simple speed-bot setup.</span><em>Open →</em></button>
-      </div>
-
-      <div class="referral">
-        <small>PARTNER REFERRAL</small>
-        <strong>Master Partner share</strong>
-        <span>Earn monthly</span>
-        <div class="orb">AI</div>
-      </div>
-
-      <button class="runbar" data-page="speed">▶ Run <span>Execution Speed <b>FAST</b></span><i></i></button>
-    </section>
-
-    <section id="speed" class="page">
-      <div class="section-title">EXECUTE TRADE ON EVERY TICK</div>
-      <div class="seg"><button class="active">START</button><button>PAUSE</button></div>
-
-      <label>SELECT MARKET</label>
-      <select id="speedMarket"><option>Volatility 100 (1s) Index</option><option>Volatility 75 (1s) Index</option><option>Volatility 50 (1s) Index</option></select>
-
-      <div class="row"><label>Event</label><select><option>Even</option><option>Odd</option></select></div>
-      <div class="mini-grid">
-        <label>Ticks<input id="ticks" type="number" value="1" min="1"></label>
-        <label>Stake<input id="stake" type="number" value="0.50" min="0.35" step="0.01"></label>
-        <label>Take Profit<input id="tp" type="number" value="10"></label>
-        <label>Stop Loss<input id="sl" type="number" value="50"></label>
-      </div>
-
-      <div class="toggle-row"><span>Alternate Even and Odd</span><button class="toggle"></button></div>
-      <div class="toggle-row"><span>Alternate on Odd</span><button class="toggle on"></button></div>
-      <div class="toggle-row"><span>Enable Martingale</span><button class="toggle on"></button></div>
-      <label>Martingale Multiplier<input value="1.15"></label>
-      <div class="toggle-row"><span>Recovery Mode</span><button class="toggle"></button></div>
-
-      <div class="stats"><span>Ticks Processed: <b id="processed">100</b></span><span>Last Digit: <b id="digit">5</b></span><span>Speed P/L: <b id="pl">0.00</b></span></div>
-      <button class="simulate" id="speedRun">RUN SIMULATION</button>
-      <div class="ai">AI</div>
-      <div class="status">Bet is not running</div>
-    </section>
-
-    <section id="bulk" class="page">
-      <div class="section-title">BULK TRADING</div>
-      <p class="muted">Run a large batch in simulation and inspect the distribution before connecting any live broker.</p>
-      <div class="card">
-        <label>MARKET<select id="bulkMarket"><option>Volatility 100 (1s) Index</option><option>Volatility 75 (1s) Index</option><option>Volatility 50 (1s) Index</option></select></label>
-        <label>TRADE TYPE<select id="tradeType"><option>Even/Odd</option><option>Over/Under</option><option>Matches/Differs</option></select></label>
-        <label>NUMBER OF TICKS<input id="bulkTicks" type="number" value="1000" min="10" max="100000"></label>
-        <label>STAKE PER TRADE<input id="bulkStake" type="number" value="0.50" min="0.35" step="0.01"></label>
-        <button class="primary" id="bulkRun">ANALYZE BATCH</button>
-      </div>
-
-      <div id="bulkResult" class="result hidden">
-        <div class="loading">Analysis complete</div>
-        <div class="metric-grid">
-          <div><b id="winPct">—</b><span>Win rate</span></div>
-          <div><b id="lossPct">—</b><span>Loss rate</span></div>
-          <div><b id="profit">—</b><span>Estimated P/L</span></div>
-          <div><b id="edge">—</b><span>Observed edge</span></div>
+        <div>
+          <label>Stake</label>
+          <input id="speedStake" type="number" value="1" min="0.35" step="0.01">
         </div>
-        <div class="digit-grid" id="digitGrid"></div>
-        <div class="bars" id="bars"></div>
-      </div>
-      <p class="notice">Simulation only. This prototype does not place real trades or request broker credentials.</p>
-    </section>
 
-    <section id="bot" class="page">
-      <div class="section-title">BOT BUILDER</div>
-      <div class="card">
-        <label>BOT NAME<input id="botName" value="My Speed Strategy"></label>
-        <label>MARKET<select><option>Volatility 100 (1s) Index</option><option>Volatility 75 (1s) Index</option></select></label>
-        <label>CONTRACT<select><option>Even</option><option>Odd</option><option>Over</option><option>Under</option></select></label>
-        <label>STAKE<input value="0.50"></label>
-        <label>TAKE PROFIT<input value="10"></label>
-        <label>STOP LOSS<input value="50"></label>
-        <button class="primary" id="saveBot">SAVE BOT CONFIG</button>
-        <button class="secondary" id="downloadConfig">EXPORT CONFIG</button>
       </div>
-    </section>
-  </main>
+
+      <div class="two-column">
+
+        <div>
+          <label>Take Profit</label>
+          <input id="takeProfit" type="number" value="10" step="0.01">
+        </div>
+
+        <div>
+          <label>Stop Loss</label>
+          <input id="stopLoss" type="number" value="10" step="0.01">
+        </div>
+
+      </div>
+
+      <div class="toggle-row">
+        <span>Alternate Even / Odd</span>
+        <input id="alternateEO" type="checkbox">
+      </div>
+
+      <div class="toggle-row">
+        <span>Alternate on Loss</span>
+        <input id="alternateLoss" type="checkbox">
+      </div>
+
+      <div class="toggle-row">
+        <span>Martingale</span>
+        <input id="martingale" type="checkbox">
+      </div>
+
+      <div class="toggle-row">
+        <span>Recovery Mode</span>
+        <input id="recovery" type="checkbox">
+      </div>
+
+      <button id="speedRun" class="run-btn">
+        ▶ Run Speed Bot
+      </button>
+
+      <button id="speedStop" class="stop-btn" disabled>
+        ■ Stop
+      </button>
+
+    </div>
+
+    <div class="stats-grid">
+
+      <div class="stat-card">
+        <span>Trades</span>
+        <strong id="speedTrades">0</strong>
+      </div>
+
+      <div class="stat-card">
+        <span>Wins</span>
+        <strong id="speedWins">0</strong>
+      </div>
+
+      <div class="stat-card">
+        <span>Losses</span>
+        <strong id="speedLosses">0</strong>
+      </div>
+
+      <div class="stat-card">
+        <span>Profit</span>
+        <strong id="speedProfit">0.00</strong>
+      </div>
+
+    </div>
+
+    <div class="panel">
+      <h3>Live Tick / Bot Log</h3>
+      <div id="speedLog" class="log-box">
+        Waiting to start...
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+
+<!-- AI BUTTON -->
+<button id="aiButton" class="ai-button">AI</button>
+
+
+<!-- BOTTOM RUN BAR -->
+<div class="bottom-run">
+  <button id="globalRun">
+    ▶ <strong>Run</strong>
+  </button>
+
+  <span>Execution Speed <strong>FAST</strong></span>
+
+  <label class="switch">
+    <input id="globalToggle" type="checkbox">
+    <span></span>
+  </label>
+</div>
+
 
 <script src="app.js"></script>
+
 </body>
-</html>
+	</html>
